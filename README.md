@@ -1,5 +1,6 @@
 # SamuROI
 If you use this software, please cite:
+You can find the documentation at: http://samuroi.readthedocs.io/en/latest/
 
 ## Requirements
 SamuROI requires the following python packages:
