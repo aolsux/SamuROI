@@ -87,7 +87,7 @@ def power_spectrum(data, fs):
     Calculate the power spectrum for each pixel and then average over all pixels.
 
     :param data: the 3D video data.
-    :param fs: sampling frequency.
+    :param fs: sampling frequency.bla
     :return: tuple(df,avgpower) where df is a 1d array of frequencies and avgpower is a 1D array with the respective average power.
     """
     N = data.shape[-1] / 2
