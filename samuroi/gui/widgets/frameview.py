@@ -3,7 +3,8 @@ import types
 
 import matplotlib
 
-from PyQt4 import QtCore, QtGui
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSlider
+from PyQt5.QtCore import QItemSelectionModel, Qt
 
 from .canvasbase import CanvasBase
 
@@ -224,7 +225,7 @@ class FrameViewCanvas(CanvasBase):
 
             def set_selected(self, a):
                 if a:
-                    overlay[self.mask.y,self.mask.x, 3] = .9
+                    overlay[self.mask.y, self.mask.x, 3] = .9
                 else:
                     overlay[self.mask.y, self.mask.x, 3] = segmentation_alpha
                 self.artist.set_array(overlay)
@@ -314,27 +315,27 @@ class FrameViewCanvas(CanvasBase):
             index = model.find(mask)
 
             # if shift key is not pressed clear selection
-            if not (event.guiEvent.modifiers() and QtCore.Qt.ShiftModifier):
+            if not (event.guiEvent.modifiers() and Qt.ShiftModifier):
                 self.selectionmodel.clear()
-            self.selectionmodel.select(index, QtGui.QItemSelectionModel.Select)
+            self.selectionmodel.select(index, QItemSelectionModel.Select)
 
 
-class FrameViewWidget(QtGui.QWidget):
+class FrameViewWidget(QWidget):
     def __init__(self, parent, segmentation, selectionmodel):
         super(FrameViewWidget, self).__init__(parent)
 
         self.segmentation = segmentation
 
         # create a vertical box layout widget
-        self.vbl = QtGui.QVBoxLayout()
+        self.vbl = QVBoxLayout()
 
         self.canvas = FrameViewCanvas(segmentation, selectionmodel)
         self.vbl.addWidget(self.canvas)
 
-        from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT
+        from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT
         self.toolbar_navigation = NavigationToolbar2QT(self.canvas, self, coordinates=False)
 
-        self.frame_slider = QtGui.QSlider(QtCore.Qt.Horizontal)
+        self.frame_slider = QSlider(Qt.Horizontal)
         self.frame_slider.setMinimum(0)
         self.frame_slider.setMaximum(self.segmentation.data.shape[2] - 1)
         self.frame_slider.setTickInterval(1)
@@ -342,7 +343,7 @@ class FrameViewWidget(QtGui.QWidget):
         self.frame_slider.setPageStep(self.segmentation.data.shape[2] / 10)
         self.frame_slider.valueChanged.connect(self.on_slider_changed)
 
-        self.toollayout = QtGui.QHBoxLayout()
+        self.toollayout = QHBoxLayout()
 
         self.toollayout.addWidget(self.toolbar_navigation)
         self.toollayout.addWidget(self.frame_slider)

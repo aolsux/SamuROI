@@ -11,7 +11,7 @@ from samuroi.event.template_matching import template_matching
 from samuroi.util.postprocessors import PostProcessorPipe, DetrendPostProcessor
 
 import sys
-from PyQt4 import QtGui
+from PyQt5 import QtWidgets
 
 import argparse
 
@@ -19,13 +19,13 @@ parser = argparse.ArgumentParser(description='Open SamuROI and load some data.')
 
 parser.add_argument('filename', type=str, help='The filename of the tif file to use as data.')
 
-parser.add_argument('--swc', dest='swcfiles', type=str, action='append', help='Filename of swc file to load.')
+parser.add_argument('--swc', dest='swcfiles', type=str, action='append',default = [], help='Filename of swc file to load.')
 
 parser.add_argument('--segmentation', dest='segmentations', type=str, action='append',
                     help='Filename of segmentations to load. (.npy files)')
 
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     args = parser.parse_args()
 
     data = load_tif(args.filename)

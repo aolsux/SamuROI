@@ -16,7 +16,7 @@ SamuROI installation was tested on:
  
     Open a terminal to first install SamuROI dependencies. Text in `this font` represents terminal commands.
     - `conda install conda-build` 
-    - `conda install pyqt=4` 
+    - `conda install pyqt`
     - `conda install cached-property` 
     
     Finally, opencv does not ship official packages for all operation systems.
@@ -27,7 +27,7 @@ SamuROI installation was tested on:
 You should now be able to `import samuroi` in python. To try it out open an IPython notebook and type in the following:
 
 ```
-%matplotlib qt4
+%matplotlib qt5
 import samuroi
 import numpy
 

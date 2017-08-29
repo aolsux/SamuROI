@@ -1,7 +1,8 @@
-from PyQt4 import QtGui, QtCore
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QToolBar, QDoubleSpinBox, QSpinBox, QStyle
 
 
-class ToolBar(QtGui.QToolBar):
+class ToolBar(QToolBar):
     """
     Common base class for all Toolbars, which provides properties for
     the active frame canvas and the active segmentation
@@ -46,10 +47,10 @@ class MaskToolbar(ToolBar):
         self.btn_toggle.setChecked(self.active_frame_canvas.show_overlay)
         self.btn_toggle.triggered.connect(lambda on: setattr(self.active_frame_canvas, "show_overlay", on))
 
-        self.threshold_spin_box = QtGui.QDoubleSpinBox(value=100.)
+        self.threshold_spin_box = QDoubleSpinBox(value=100.)
         self.threshold_spin_box.setRange(0., 99999.)
         self.threshold_spin_box.setValue(100.)
-        self.threshold_spin_box.setAlignment(QtCore.Qt.Alignment(QtCore.Qt.AlignRight))
+        self.threshold_spin_box.setAlignment(Qt.Alignment(Qt.AlignRight))
         self.threshold_spin_box.setSingleStep(.5)
         self.threshold_spin_box.valueChanged.connect(self.update_threshold)
 
@@ -83,7 +84,7 @@ class SplitJoinToolbar(ToolBar):
         self.btn_split_single.setToolTip("Split all branches.")
         self.btn_split_single.triggered.connect(self.split_all)
 
-        self.split_length_widget = QtGui.QSpinBox(value=5)
+        self.split_length_widget = QSpinBox(value=5)
         self.split_length_widget.setToolTip("Choose the spliting length.")
         self.addWidget(self.split_length_widget)
 
@@ -109,19 +110,19 @@ class MaskMovingToolbar(ToolBar):
     def __init__(self, parent, *args, **kwargs):
         super(MaskMovingToolbar, self).__init__(parent=parent, *args, **kwargs)
 
-        self.btn_move_left = self.addAction(self.style().standardIcon(QtGui.QStyle.SP_ArrowLeft), "<-")
+        self.btn_move_left = self.addAction(self.style().standardIcon(QStyle.SP_ArrowLeft), "<-")
         self.btn_move_left.triggered.connect(lambda: self.on_move([-1, 0]))
         self.btn_move_left.setToolTip("Move selected masks left.")
 
-        self.btn_move_right = self.addAction(self.style().standardIcon(QtGui.QStyle.SP_ArrowRight), "->")
+        self.btn_move_right = self.addAction(self.style().standardIcon(QStyle.SP_ArrowRight), "->")
         self.btn_move_right.triggered.connect(lambda: self.on_move([1, 0]))
         self.btn_move_right.setToolTip("Move selected masks right.")
 
-        self.btn_move_up = self.addAction(self.style().standardIcon(QtGui.QStyle.SP_ArrowUp), "^")
+        self.btn_move_up = self.addAction(self.style().standardIcon(QStyle.SP_ArrowUp), "^")
         self.btn_move_up.triggered.connect(lambda: self.on_move([0, -1]))
         self.btn_move_up.setToolTip("Move selected masks upwards.")
 
-        self.btn_move_down = self.addAction(self.style().standardIcon(QtGui.QStyle.SP_ArrowDown), "v")
+        self.btn_move_down = self.addAction(self.style().standardIcon(QStyle.SP_ArrowDown), "v")
         self.btn_move_down.triggered.connect(lambda: self.on_move([0, 1]))
         self.btn_move_down.setToolTip("Move selected masks downwards.")
 
@@ -238,7 +239,7 @@ class ManageRoiToolbar(ToolBar):
 
         tooltip = "Delete/remove the currently selected roi."
 
-        self.remove_mask = self.addAction(self.style().standardIcon(QtGui.QStyle.SP_DialogDiscardButton), 'X')
+        self.remove_mask = self.addAction(self.style().standardIcon(QStyle.SP_DialogDiscardButton), 'X')
         self.remove_mask.setToolTip(tooltip)
         self.remove_mask.triggered.connect(self.remove_roi)
 
@@ -275,7 +276,7 @@ class PostProcessorToolbar(ToolBar):
         self.toggle_smoothen.setCheckable(True)
         self.toggle_smoothen.triggered.connect(self.update_posprocessor)
 
-        self.spin_smoothen = QtGui.QSpinBox(value=3)
+        self.spin_smoothen = QSpinBox(value=3)
 
         self.spin_smoothen.setMinimum(2)
         self.spin_smoothen.setToolTip("Choose the number of frames for the moving average.")

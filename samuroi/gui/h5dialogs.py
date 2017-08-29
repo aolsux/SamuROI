@@ -1,7 +1,7 @@
-from PyQt4 import QtGui
+from PyQt5.QtWidgets import QFileDialog,QCheckBox
 
 
-class H5Dialog(QtGui.QFileDialog):
+class H5Dialog(QFileDialog):
     def __init__(self, *args, **kwargs):
         super(H5Dialog, self).__init__(*args, **kwargs)
 
@@ -13,15 +13,15 @@ class H5Dialog(QtGui.QFileDialog):
         # TODO: make nice sub layout
         layout = self.layout()
 
-        self.chk_branches = QtGui.QCheckBox("Branch Masks")
-        self.chk_freehand = QtGui.QCheckBox("Freehand Masks")
-        self.chk_pixel = QtGui.QCheckBox("Pixel Masks")
-        self.chk_circles = QtGui.QCheckBox("Circle Masks")
+        self.chk_branches = QCheckBox("Branch Masks")
+        self.chk_freehand = QCheckBox("Freehand Masks")
+        self.chk_pixel = QCheckBox("Pixel Masks")
+        self.chk_circles = QCheckBox("Circle Masks")
 
-        self.chk_traces = QtGui.QCheckBox("Traces")
-        self.chk_data = QtGui.QCheckBox("Data")
-        self.chk_mask = QtGui.QCheckBox("Threshold Mask")
-        self.chk_segmentation = QtGui.QCheckBox("Segmentation")
+        self.chk_traces = QCheckBox("Traces")
+        self.chk_data = QCheckBox("Data")
+        self.chk_mask = QCheckBox("Threshold Mask")
+        self.chk_segmentation = QCheckBox("Segmentation")
 
         layout.addWidget(self.chk_branches)
         layout.addWidget(self.chk_freehand)
@@ -36,8 +36,8 @@ class H5SaveDialog(H5Dialog):
     def __init__(self, *args, **kwargs):
         super(H5SaveDialog, self).__init__(*args, **kwargs)
 
-        self.setAcceptMode(QtGui.QFileDialog.AcceptSave)
-        self.setFileMode(QtGui.QFileDialog.AnyFile)
+        self.setAcceptMode(QFileDialog.AcceptSave)
+        self.setFileMode(QFileDialog.AnyFile)
 
         self.chk_branches.setChecked(True)
         self.chk_freehand.setChecked(True)
@@ -63,8 +63,8 @@ class H5LoadDialog(H5Dialog):
     def __init__(self, *args, **kwargs):
         super(H5LoadDialog, self).__init__(*args, **kwargs)
 
-        self.setFileMode(QtGui.QFileDialog.ExistingFile)
-        self.setAcceptMode(QtGui.QFileDialog.AcceptOpen)
+        self.setFileMode(QFileDialog.ExistingFile)
+        self.setAcceptMode(QFileDialog.AcceptOpen)
 
         self.chk_branches.setEnabled(False)
         self.chk_freehand.setEnabled(False)
