@@ -86,7 +86,7 @@ class ComCorrector(object):
             self.centers_of_mass_plot2.set_data(self.mask_generator.centers_of_mass[:, 1],
                                                 self.mask_generator.centers_of_mass[:, 0])
             self.centers_of_mass_plot3.set_data(self.mask_generator.centers_of_mass[:, 1],
-                                                self.mask_generator.cocenters_of_mass[:, 0])
+                                                self.mask_generator.centers_of_mass[:, 0])
             self.fig.canvas.draw()
         except Exception as e:
             print e
